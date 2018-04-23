@@ -18,7 +18,7 @@ public class Main {
 
 
         available=new HashSet<>();
-        FmFmKnowledgeBase kb = new FmFmKnowledgeBase();
+        FmFmKnowledgeBase kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 2a: Simple substitution");
         BuildCase2a(available,requirements,kb);
         comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
@@ -26,7 +26,7 @@ public class Main {
 
 
         available=new HashSet<>();
-        kb = new FmFmKnowledgeBase();
+        kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 2b: substitution with conflict");
         BuildCase2b(available,requirements,kb);
         comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
@@ -34,7 +34,7 @@ public class Main {
 
 
         available=new HashSet<>();
-        kb = new FmFmKnowledgeBase();
+        kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 3a: changing requirements/recipe");
         BuildCase3a(available,requirements,kb);
         comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
@@ -44,7 +44,7 @@ public class Main {
 
 
         available=new HashSet<>();
-        kb = new FmFmKnowledgeBase();
+        kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 3b: changing requirements and substitution");
         BuildCase3b(available,requirements,kb);
         comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);

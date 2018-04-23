@@ -15,7 +15,7 @@ public class Ingredient implements Component {
         if (!(o instanceof Ingredient))
             return false;
         Ingredient t = (Ingredient) o;
-        return this.name == t.name;
+        return this.name.equalsIgnoreCase(t.name);
     }
 
     @Override

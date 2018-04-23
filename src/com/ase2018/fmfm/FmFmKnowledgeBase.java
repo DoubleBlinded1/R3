@@ -8,9 +8,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FmFmKnowledgeBase implements KnowledgeBase {
+//public class FmFmKnowledgeBase implements KnowledgeBase {
+    public class FmFmKnowledgeBase extends FmFmKnowledgeBaseDB {
     HashMap<String,Set<Substitute>>  substituteHashMap = new HashMap<>();
     Set<Recipe> allReq = new HashSet<>();
+
+    public FmFmKnowledgeBase(String path) {
+        super(path);
+    }
 
 
     @Override
