@@ -6,5 +6,5 @@ public interface KnowledgeBase {
 
     Set<Set<Component>> getSubstitute(Set<Component> substituee);
 
-    Set<Requirement>  getRecommendation(Requirement originalRequirement,Integer k);
+    Set<Requirement> getRecommendation(Requirement originalRequirement, Integer k);
 }

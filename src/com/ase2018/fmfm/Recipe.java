@@ -9,10 +9,11 @@ public class Recipe implements Requirement {
     String name;
     Set<Ingredient> ingredients = new HashSet<>();
 
-    public Recipe(String name){
+    public Recipe(String name) {
         this.name = name;
     }
-    public Recipe(Set<Ingredient> ingredients){
+
+    public Recipe(Set<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -20,16 +21,16 @@ public class Recipe implements Requirement {
         ingredients.add(b);
     }
 
-    public boolean doable(Set<Ingredient> ingredients){
+    public boolean doable(Set<Ingredient> ingredients) {
         boolean bool = false;
-        for (Ingredient i:ingredients) {
+        for (Ingredient i : ingredients) {
             for (Ingredient j : this.ingredients) {
                 if (j.equals(i)) {
                     bool = true;
                     break;
                 }
             }
-            if (!bool){
+            if (!bool) {
                 return false;
             }
 
@@ -37,10 +38,10 @@ public class Recipe implements Requirement {
         return true;
     }
 
-    public double measureRecipeSimilarity(Recipe recipe){
+    public double measureRecipeSimilarity(Recipe recipe) {
         double common = 0;
         Set<Ingredient> ing = recipe.ingredients;
-        for (Ingredient i:ing) {
+        for (Ingredient i : ing) {
             for (Ingredient j : this.ingredients) {
                 if (j.equals(i)) {
                     common++;
@@ -48,10 +49,10 @@ public class Recipe implements Requirement {
                 }
             }
         }
-        if (common==0)
+        if (common == 0)
             return 0;
-        double sim = common/recipe.ingredients.size();
-        System.out.println("common = "+common+" size = "+recipe.ingredients.size()+" sim ="+sim);
+        double sim = common / recipe.ingredients.size();
+        System.out.println("common = " + common + " size = " + recipe.ingredients.size() + " sim =" + sim);
         return (sim);
     }
 

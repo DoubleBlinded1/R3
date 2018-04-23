@@ -8,49 +8,49 @@ public class Main {
     public static void main(String[] args) {
 
 
-        Set<Ingredient> requirements=new HashSet<>();
-        Set<Ingredient> available=new HashSet<>();
+        Set<Ingredient> requirements = new HashSet<>();
+        Set<Ingredient> available = new HashSet<>();
 
         System.out.println("\nCase 1: Exact matching");
-        BuildCase1(available,requirements);
-        Set<Ingredient> comp= FmFmThreeTierComposition.RequirementsDriven(available,requirements);
-        System.out.println("result = "+comp);
+        BuildCase1(available, requirements);
+        Set<Ingredient> comp = FmFmThreeTierComposition.RequirementsDriven(available, requirements);
+        System.out.println("result = " + comp);
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         FmFmKnowledgeBase kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 2a: Simple substitution");
-        BuildCase2a(available,requirements,kb);
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        System.out.println("result = "+comp);
+        BuildCase2a(available, requirements, kb);
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        System.out.println("result = " + comp);
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 2b: substitution with conflict");
-        BuildCase2b(available,requirements,kb);
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        System.out.println("result = "+comp);
+        BuildCase2b(available, requirements, kb);
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        System.out.println("result = " + comp);
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 3a: changing requirements/recipe");
-        BuildCase3a(available,requirements,kb);
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        System.out.println("result Alternatives = "+comp);
-        Set<Option> options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        System.out.println("result options = "+options);
+        BuildCase3a(available, requirements, kb);
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        System.out.println("result Alternatives = " + comp);
+        Set<Option> options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        System.out.println("result options = " + options);
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new FmFmKnowledgeBase("");
         System.out.println("\nCase 3b: changing requirements and substitution");
-        BuildCase3b(available,requirements,kb);
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        System.out.println("result Alternatives = "+comp);
-        options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        System.out.println("result options = "+options);
+        BuildCase3b(available, requirements, kb);
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        System.out.println("result Alternatives = " + comp);
+        options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        System.out.println("result options = " + options);
 
     }
 
@@ -65,38 +65,38 @@ public class Main {
         available.add(new Ingredient("AlmondFlour"));
     }
 
-    private static void BuildCase2a(Set<Ingredient> available, Set<Ingredient> requirements,FmFmKnowledgeBase kb) {
+    private static void BuildCase2a(Set<Ingredient> available, Set<Ingredient> requirements, FmFmKnowledgeBase kb) {
         available.add(new Ingredient("Chocolate"));
         available.add(new Ingredient("BrownSugar"));
         available.add(new Ingredient("HazelnutFlour"));
         available.add(new Ingredient("CornFlour"));
 
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("HazelnutFlour"),0.8);
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("CornFlour"),0.4);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("HazelnutFlour"), 0.8);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("CornFlour"), 0.4);
     }
 
-    private static void BuildCase2b(Set<Ingredient> available, Set<Ingredient> requirements,FmFmKnowledgeBase kb) {
+    private static void BuildCase2b(Set<Ingredient> available, Set<Ingredient> requirements, FmFmKnowledgeBase kb) {
         available.add(new Ingredient("Cocoa"));
         available.add(new Ingredient("BrownSugar"));
         available.add(new Ingredient("HazelnutFlour"));
         available.add(new Ingredient("CornFlour"));
 
 
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("HazelnutFlour"),0.8);
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("CornFlour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("HazelnutFlour"),0);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("HazelnutFlour"), 0.8);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("CornFlour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("HazelnutFlour"), 0);
     }
 
-    private static void BuildCase3a(Set<Ingredient> available, Set<Ingredient> requirements,FmFmKnowledgeBase kb) {
+    private static void BuildCase3a(Set<Ingredient> available, Set<Ingredient> requirements, FmFmKnowledgeBase kb) {
         available.add(new Ingredient("BrownSugar"));
         available.add(new Ingredient("HazelnutFlour"));
         available.add(new Ingredient("CornFlour"));
 
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("HazelnutFlour"),0.8);
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("CornFlour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("HazelnutFlour"),0);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("HazelnutFlour"), 0.8);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("CornFlour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("HazelnutFlour"), 0);
 
         Recipe recipe = new Recipe("Blondie");
         recipe.addIngredient(new Ingredient("BrownSugar"));
@@ -112,15 +112,15 @@ public class Main {
         kb.addRequirements(recipe);
     }
 
-    private static void BuildCase3b(Set<Ingredient> available, Set<Ingredient> requirements,FmFmKnowledgeBase kb) {
+    private static void BuildCase3b(Set<Ingredient> available, Set<Ingredient> requirements, FmFmKnowledgeBase kb) {
         available.add(new Ingredient("BrownSugar"));
         available.add(new Ingredient("HazelnutFlour"));
         available.add(new Ingredient("CornFlour"));
 
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("HazelnutFlour"),0.8);
-        kb.addSubstitute(new Ingredient("AlmondFlour"),new Ingredient("CornFlour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("HazelnutFlour"),0);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("HazelnutFlour"), 0.8);
+        kb.addSubstitute(new Ingredient("AlmondFlour"), new Ingredient("CornFlour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("HazelnutFlour"), 0);
 
         Recipe recipe = new Recipe("Blondie");
         recipe.addIngredient(new Ingredient("BrownSugar"));

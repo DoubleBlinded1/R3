@@ -6,7 +6,7 @@ public class Ingredient implements Component {
 
     private String name = null;
 
-    public Ingredient(String name){
+    public Ingredient(String name) {
         this.name = name;
     }
 

@@ -5,19 +5,34 @@ import com.ase2018.generic.KnowledgeBase;
 import com.ase2018.generic.Requirement;
 
 import java.sql.*;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class FmFmKnowledgeBaseDB implements KnowledgeBase {
-    private HashMap<String, Set<Substitute>> substituteHashMap = new HashMap<>();
     Set<Recipe> allReq = new HashSet<>();
-
-
     Connection connection = null;
     Statement stmt = null;
+    private HashMap<String, Set<Substitute>> substituteHashMap = new HashMap<>();
 
+
+    public FmFmKnowledgeBaseDB(String path) {
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:" + path);
+            connection.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+            initSubstitutes();
+            System.out.println("Substitutions initialised");
+
+        } catch (Exception e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+
+
+    }
 
     @Override
     public Set<Set<Component>> getSubstitute(Set<Component> substituee) {
@@ -29,7 +44,7 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
         return null;
     }
 
-    public Set<Recipe> getRecommendation(Set<Ingredient> originalRequirement, Set<Ingredient> available,int threshold) {
+    public Set<Recipe> getRecommendation(Set<Ingredient> originalRequirement, Set<Ingredient> available, int threshold) {
         Set<Recipe> recipes = new HashSet<>();
         Statement stmt = null;
         try {
@@ -53,12 +68,12 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
             rs.close();
 
             Set<Ingredient> ingredients = null;
-            for(Recipe rec: recipes){
+            for (Recipe rec : recipes) {
                 stmt = connection.createStatement();
                 rs = stmt.executeQuery("SELECT db_ingredient.name AS ingName from db_ingredient\n" +
                         "INNER JOIN db_recipeingredient r ON db_ingredient.id = r.ingredient_id\n" +
                         "INNER JOIN db_recipe recipe ON r.recipe_id = recipe.id\n" +
-                        "WHERE recipe.name = \""+rec.name+"\"");
+                        "WHERE recipe.name = \"" + rec.name + "\"");
                 ingredients = new HashSet<>();
                 String name1;
                 while (rs.next()) {
@@ -107,12 +122,12 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
             rs.close();
 
             Set<Ingredient> ingredients = null;
-            for(Recipe r: recipes){
+            for (Recipe r : recipes) {
                 stmt = connection.createStatement();
                 rs = stmt.executeQuery("SELECT db_ingredient.name AS ingName from db_ingredient\n" +
                         "INNER JOIN db_recipeingredient r ON db_ingredient.id = r.ingredient_id\n" +
                         "INNER JOIN db_recipe recipe ON r.recipe_id = recipe.id\n" +
-                        "WHERE recipe.name = \""+r.name+"\"");
+                        "WHERE recipe.name = \"" + r.name + "\"");
                 ingredients = new HashSet<>();
                 String name1;
                 while (rs.next()) {
@@ -128,28 +143,8 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
 
     }
 
-
     public Set<Substitute> getSubstitutes(Ingredient i1) {
         return substituteHashMap.get(i1.getName());
-    }
-
-
-    public FmFmKnowledgeBaseDB(String path) {
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            connection = DriverManager.getConnection("jdbc:sqlite:" + path);
-            connection.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-            initSubstitutes();
-            System.out.println("Substitutions initialised");
-
-        } catch (Exception e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-
-
     }
 
     public void getIngredientsOfRecipe(String recipeName) {

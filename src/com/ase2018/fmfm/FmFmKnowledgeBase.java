@@ -1,7 +1,6 @@
 package com.ase2018.fmfm;
 
 import com.ase2018.generic.Component;
-import com.ase2018.generic.KnowledgeBase;
 import com.ase2018.generic.Requirement;
 
 import java.util.HashMap;
@@ -9,8 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 //public class FmFmKnowledgeBase implements KnowledgeBase {
-    public class FmFmKnowledgeBase extends FmFmKnowledgeBaseDB {
-    HashMap<String,Set<Substitute>>  substituteHashMap = new HashMap<>();
+public class FmFmKnowledgeBase extends FmFmKnowledgeBaseDB {
+    HashMap<String, Set<Substitute>> substituteHashMap = new HashMap<>();
     Set<Recipe> allReq = new HashSet<>();
 
     public FmFmKnowledgeBase(String path) {
@@ -28,10 +27,10 @@ import java.util.Set;
         return null;
     }
 
-    public Set<Recipe> getRecommendation(Set<Ingredient> originalRequirement, Set<Ingredient> available) {
+    public Set<Recipe> getRecommendation(Set<Ingredient> originalRequirement, Set<Ingredient> available, int threshold) {
         Set<Recipe> recipes = new HashSet<>();
-        for(Recipe rec:allReq){
-            if (rec.doable(available)){
+        for (Recipe rec : allReq) {
+            if (rec.doable(available)) {
                 recipes.add(rec);
             }
         }
@@ -41,12 +40,12 @@ import java.util.Set;
 
     public void addSubstitute(Ingredient i1, Ingredient i2, double similarity) {
         Set<Substitute> subs = substituteHashMap.get(i1.getName());
-        if (subs == null){
+        if (subs == null) {
             subs = new HashSet<>();
-            substituteHashMap.put(i1.getName(),subs);
+            substituteHashMap.put(i1.getName(), subs);
         }
         //TODO: check if the substitute does not already exist
-        subs.add(new Substitute(i2,similarity));
+        subs.add(new Substitute(i2, similarity));
         //TODO: Is it a commutative relationship
     }
 

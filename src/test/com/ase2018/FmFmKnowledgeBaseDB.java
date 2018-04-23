@@ -3,7 +3,6 @@ package com.ase2018;
 import com.ase2018.fmfm.FmFmThreeTierComposition;
 import com.ase2018.fmfm.Ingredient;
 import com.ase2018.fmfm.Option;
-import com.ase2018.fmfm.Recipe;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,57 +12,57 @@ public class FmFmKnowledgeBaseDB {
     public static void main(String[] args) {
 
 
-        Set<Ingredient> requirements=new HashSet<>();
-        Set<Ingredient> available=new HashSet<>();
+        Set<Ingredient> requirements = new HashSet<>();
+        Set<Ingredient> available = new HashSet<>();
 
-        long time,initTime = 0;
+        long time, initTime = 0;
 
         System.out.println("\nCase 1: Exact matching");
-        BuildCase1(available,requirements);
+        BuildCase1(available, requirements);
         initTime = System.currentTimeMillis();
-        Set<Ingredient> comp= FmFmThreeTierComposition.RequirementsDriven(available,requirements);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        Set<Ingredient> comp = FmFmThreeTierComposition.RequirementsDriven(available, requirements);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
         String path = "resources/simple_with_subs_db.sqlite3";
 //      path = "resources/1000recipes_with_substitutions_with_similarity.sqlite3";
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         com.ase2018.fmfm.FmFmKnowledgeBaseDB kb = new com.ase2018.fmfm.FmFmKnowledgeBaseDB(path);
         System.out.println("\nCase 2a: Simple substitution");
-        BuildCase2a(available,requirements);
+        BuildCase2a(available, requirements);
         initTime = System.currentTimeMillis();
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         System.out.println("\nCase 2b: substitution with conflict");
-        BuildCase2b(available,requirements);
+        BuildCase2b(available, requirements);
         initTime = System.currentTimeMillis();
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         System.out.println("\nCase 3a: changing requirements/recipe");
-        BuildCase3a(available,requirements);
+        BuildCase3a(available, requirements);
         initTime = System.currentTimeMillis();
-        Set<Option> options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result options = "+options+"    in "+time+"ms");
+        Set<Option> options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result options = " + options + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         System.out.println("\nCase 3b: changing requirements and substitution");
-        BuildCase3b(available,requirements);
+        BuildCase3b(available, requirements);
         initTime = System.currentTimeMillis();
-        options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result options = "+options+"    in "+time+"ms");
+        options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result options = " + options + "    in " + time + "ms");
 
     }
 
@@ -136,7 +135,6 @@ public class FmFmKnowledgeBaseDB {
 //
 //        kb.addRequirements(recipe);
     }
-
 
 
 }

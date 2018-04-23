@@ -12,56 +12,56 @@ public class FmFmKnowledgeBase {
     public static void main(String[] args) {
 
 
-        Set<Ingredient> requirements=new HashSet<>();
-        Set<Ingredient> available=new HashSet<>();
+        Set<Ingredient> requirements = new HashSet<>();
+        Set<Ingredient> available = new HashSet<>();
 
-        long time,initTime = 0;
+        long time, initTime = 0;
 
         System.out.println("\nCase 1: Exact matching");
-        BuildCase1(available,requirements);
+        BuildCase1(available, requirements);
         initTime = System.currentTimeMillis();
-        Set<Ingredient> comp= FmFmThreeTierComposition.RequirementsDriven(available,requirements);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        Set<Ingredient> comp = FmFmThreeTierComposition.RequirementsDriven(available, requirements);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         com.ase2018.fmfm.FmFmKnowledgeBase kb = new com.ase2018.fmfm.FmFmKnowledgeBase("");
         System.out.println("\nCase 2a: Simple substitution");
-        BuildCase2a(available,requirements,kb);
+        BuildCase2a(available, requirements, kb);
         initTime = System.currentTimeMillis();
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new com.ase2018.fmfm.FmFmKnowledgeBase("");
         System.out.println("\nCase 2b: substitution with conflict");
-        BuildCase2b(available,requirements,kb);
+        BuildCase2b(available, requirements, kb);
         initTime = System.currentTimeMillis();
-        comp=FmFmThreeTierComposition.Alternatives(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result = "+comp+"    in "+time+"ms");
+        comp = FmFmThreeTierComposition.Alternatives(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new com.ase2018.fmfm.FmFmKnowledgeBase("");
         System.out.println("\nCase 3a: changing requirements/recipe");
-        BuildCase3a(available,requirements,kb);
+        BuildCase3a(available, requirements, kb);
         initTime = System.currentTimeMillis();
-        Set<Option> options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result options = "+options+"    in "+time+"ms");
+        Set<Option> options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result options = " + options + "    in " + time + "ms");
 
 
-        available=new HashSet<>();
+        available = new HashSet<>();
         kb = new com.ase2018.fmfm.FmFmKnowledgeBase("");
         System.out.println("\nCase 3b: changing requirements and substitution");
-        BuildCase3b(available,requirements,kb);
+        BuildCase3b(available, requirements, kb);
         initTime = System.currentTimeMillis();
-        options=FmFmThreeTierComposition.ResourceDriven(available,requirements,kb);
-        time = System.currentTimeMillis()-initTime;
-        System.out.println("result options = "+options+"    in "+time+"ms");
+        options = FmFmThreeTierComposition.ResourceDriven(available, requirements, kb);
+        time = System.currentTimeMillis() - initTime;
+        System.out.println("result options = " + options + "    in " + time + "ms");
 
     }
 
@@ -82,8 +82,8 @@ public class FmFmKnowledgeBase {
         available.add(new Ingredient("Hazelnut Flour"));
         available.add(new Ingredient("Corn Flour"));
 
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Hazelnut Flour"),0.8);
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Corn Flour"),0.4);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Hazelnut Flour"), 0.8);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Corn Flour"), 0.4);
     }
 
     private static void BuildCase2b(Set<Ingredient> available, Set<Ingredient> requirements, com.ase2018.fmfm.FmFmKnowledgeBase kb) {
@@ -93,10 +93,10 @@ public class FmFmKnowledgeBase {
         available.add(new Ingredient("Corn Flour"));
 
 
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Hazelnut Flour"),0.8);
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Corn Flour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("Hazelnut Flour"),0);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Hazelnut Flour"), 0.8);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Corn Flour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("Hazelnut Flour"), 0);
     }
 
     private static void BuildCase3a(Set<Ingredient> available, Set<Ingredient> requirements, com.ase2018.fmfm.FmFmKnowledgeBase kb) {
@@ -104,10 +104,10 @@ public class FmFmKnowledgeBase {
         available.add(new Ingredient("Hazelnut Flour"));
         available.add(new Ingredient("Corn Flour"));
 
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Hazelnut Flour"),0.8);
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Corn Flour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("Hazelnut Flour"),0);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Hazelnut Flour"), 0.8);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Corn Flour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("Hazelnut Flour"), 0);
 
         Recipe recipe = new Recipe("Blondie");
         recipe.addIngredient(new Ingredient("Brown Sugar"));
@@ -128,10 +128,10 @@ public class FmFmKnowledgeBase {
         available.add(new Ingredient("Hazelnut Flour"));
         available.add(new Ingredient("Corn Flour"));
 
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Hazelnut Flour"),0.8);
-        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Corn Flour"),0.4);
-        kb.addSubstitute(new Ingredient("Chocolate"),new Ingredient("Cocoa"),0.6);
-        kb.addSubstitute(new Ingredient("Cocoa"),new Ingredient("Hazelnut Flour"),0);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Hazelnut Flour"), 0.8);
+        kb.addSubstitute(new Ingredient("Almond Flour"), new Ingredient("Corn Flour"), 0.4);
+        kb.addSubstitute(new Ingredient("Chocolate"), new Ingredient("Cocoa"), 0.6);
+        kb.addSubstitute(new Ingredient("Cocoa"), new Ingredient("Hazelnut Flour"), 0);
 
         Recipe recipe = new Recipe("Blondie");
         recipe.addIngredient(new Ingredient("Brown Sugar"));
@@ -146,7 +146,6 @@ public class FmFmKnowledgeBase {
 
         kb.addRequirements(recipe);
     }
-
 
 
 }

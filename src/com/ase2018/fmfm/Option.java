@@ -8,7 +8,7 @@ public class Option {
     public double similarity;
 
 
-    public Option(Recipe requirements,Set<Ingredient> ingredients,double similarity){
+    public Option(Recipe requirements, Set<Ingredient> ingredients, double similarity) {
         this.requirements = requirements;
         this.ingredients = ingredients;
         this.similarity = similarity;
@@ -16,6 +16,6 @@ public class Option {
 
     @Override
     public String toString() {
-        return "["+requirements+":"+ingredients+"-"+similarity+"]";
+        return "[" + requirements + ":" + ingredients + "-" + similarity + "]";
     }
 }
