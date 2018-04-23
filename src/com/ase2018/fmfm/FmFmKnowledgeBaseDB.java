@@ -49,11 +49,17 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
+            String availableIng = "";
+            availableIng += "\"Brown Sugar\",\"Hazelnut Flour\"";
+            for(Ingredient i:originalRequirement){
+                availableIng += "\""+i.getName()+"\",";
+            }
+            availableIng = availableIng.substring(0, availableIng.length() - 1);
             ResultSet rs = stmt.executeQuery("SELECT id,name FROM db_recipe\n" +
                     "WHERE id NOT IN (\n" +
                     "  SELECT DISTINCT recipe_id FROM db_recipeingredient\n" +
                     "  where ingredient_id NOT IN (\n" +
-                    "    SELECT id FROM db_ingredient WHERE db_ingredient.name IN (\"Brown Sugar\",\"Hazelnut Flour\")\n" +
+                    "    SELECT id FROM db_ingredient WHERE db_ingredient.name IN ("+availableIng+")\n" +
                     "  )\n" +
                     ")\n" +
                     "LIMIT " + threshold);
