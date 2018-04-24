@@ -50,8 +50,7 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
         try {
             stmt = connection.createStatement();
             String availableIng = "";
-            availableIng += "\"Brown Sugar\",\"Hazelnut Flour\"";
-            for(Ingredient i:originalRequirement){
+            for(Ingredient i:available){
                 availableIng += "\""+i.getName()+"\",";
             }
             availableIng = availableIng.substring(0, availableIng.length() - 1);

@@ -7,13 +7,17 @@ import com.ase2018.fmfm.Option;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FmFmKnowledgeBaseDB {
+public class FmFmKnowledgeBaseDB_C_R1 {
 
     public static void main(String[] args) {
 
 
         Set<Ingredient> requirements = new HashSet<>();
         Set<Ingredient> available = new HashSet<>();
+
+
+
+        //recipe 1153 =
 
         long time, initTime = 0;
 
@@ -25,8 +29,7 @@ public class FmFmKnowledgeBaseDB {
         System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        String path = "resources/simple_with_subs_db.sqlite3";
-//      path = "resources/1000recipes_with_substitutions_with_similarity.sqlite3";
+        String path = "resources/1000recipes_with_substitutions_with_similarity.sqlite3";
 
         available = new HashSet<>();
         com.ase2018.fmfm.FmFmKnowledgeBaseDB kb = new com.ase2018.fmfm.FmFmKnowledgeBaseDB(path);
@@ -67,35 +70,74 @@ public class FmFmKnowledgeBaseDB {
     }
 
     private static void BuildCase1(Set<Ingredient> available, Set<Ingredient> requirements) {
-        requirements.add(new Ingredient("Chocolate"));
-        requirements.add(new Ingredient("Brown Sugar"));
-        requirements.add(new Ingredient("Almond Flour"));
+        requirements.add(new Ingredient("cake flour"));
+        requirements.add(new Ingredient("baking soda"));
+        requirements.add(new Ingredient("baking powder"));
+        requirements.add(new Ingredient("plus pinch of salt"));
+        requirements.add(new Ingredient("buttermilk"));
+        requirements.add(new Ingredient("(3 sticks) unsalted butter"));
+        requirements.add(new Ingredient("sugar"));
+        requirements.add(new Ingredient("eggs"));
+        requirements.add(new Ingredient("packages cream cheese"));
+        requirements.add(new Ingredient("powdered sugar"));
+        requirements.add(new Ingredient("bananas"));
 
+        available.add(new Ingredient("cake flour"));
+        available.add(new Ingredient("baking soda"));
+        available.add(new Ingredient("baking powder"));
+        available.add(new Ingredient("plus pinch of salt"));
+        available.add(new Ingredient("buttermilk"));
+        available.add(new Ingredient("(3 sticks) unsalted butter"));
+        available.add(new Ingredient("sugar"));
+        available.add(new Ingredient("eggs"));
+        available.add(new Ingredient("packages cream cheese"));
+        available.add(new Ingredient("powdered sugar"));
+        available.add(new Ingredient("bananas"));
 
-        available.add(new Ingredient("Chocolate"));
-        available.add(new Ingredient("Brown Sugar"));
-        available.add(new Ingredient("Almond Flour"));
     }
 
     private static void BuildCase2a(Set<Ingredient> available, Set<Ingredient> requirements) {
-        available.add(new Ingredient("Chocolate"));
-        available.add(new Ingredient("Brown Sugar"));
-        available.add(new Ingredient("Hazelnut Flour"));
-        available.add(new Ingredient("Corn Flour"));
+        available.add(new Ingredient("cake flour"));
+        available.add(new Ingredient("baking soda"));
+        available.add(new Ingredient("baking powder"));
+        available.add(new Ingredient("plus pinch of salt"));
+        available.add(new Ingredient("plain yoghurt"));
+        available.add(new Ingredient("(3 sticks) unsalted butter"));
+        available.add(new Ingredient("sugar"));
+        available.add(new Ingredient("eggs"));
+        available.add(new Ingredient("packages cream cheese"));
+        available.add(new Ingredient("powdered sugar"));
+        available.add(new Ingredient("bananas"));
     }
 
     private static void BuildCase2b(Set<Ingredient> available, Set<Ingredient> requirements) {
-        available.add(new Ingredient("Cocoa"));
-        available.add(new Ingredient("Brown Sugar"));
-        available.add(new Ingredient("Hazelnut Flour"));
-        available.add(new Ingredient("Corn Flour"));
+        available.add(new Ingredient("cake flour"));
+        available.add(new Ingredient("baking soda"));
+        available.add(new Ingredient("baking powder"));
+        available.add(new Ingredient("plus pinch of salt"));
+        available.add(new Ingredient("buttermilk"));
+        available.add(new Ingredient("(3 sticks) unsalted butter"));
+        available.add(new Ingredient("sugar"));
+        available.add(new Ingredient("eggs"));
+        available.add(new Ingredient("packages cream cheese"));
+        available.add(new Ingredient("powdered sugar"));
+        available.add(new Ingredient("bananas"));
 
     }
 
     private static void BuildCase3a(Set<Ingredient> available, Set<Ingredient> requirements) {
-        available.add(new Ingredient("Brown Sugar"));
-        available.add(new Ingredient("Hazelnut Flour"));
-        available.add(new Ingredient("Corn Flour"));
+        available.add(new Ingredient("cake flour"));
+        available.add(new Ingredient("baking soda"));
+        available.add(new Ingredient("baking powder"));
+        available.add(new Ingredient("plus pinch of salt"));
+        available.add(new Ingredient("buttermilk"));
+        available.add(new Ingredient("(3 sticks) unsalted butter"));
+        available.add(new Ingredient("sugar"));
+        available.add(new Ingredient("eggs"));
+        available.add(new Ingredient("packages cream cheese"));
+        available.add(new Ingredient("powdered sugar"));
+        available.add(new Ingredient("apple"));
+        available.add(new Ingredient("orange"));
 
 
 //        Recipe recipe = new Recipe("Blondie");
@@ -113,9 +155,17 @@ public class FmFmKnowledgeBaseDB {
     }
 
     private static void BuildCase3b(Set<Ingredient> available, Set<Ingredient> requirements) {
-        available.add(new Ingredient("Brown Sugar"));
-        available.add(new Ingredient("Hazelnut Flour"));
-        available.add(new Ingredient("Corn Flour"));
+        available.add(new Ingredient("cake flour"));
+        available.add(new Ingredient("baking soda"));
+        available.add(new Ingredient("baking powder"));
+        available.add(new Ingredient("plus pinch of salt"));
+        available.add(new Ingredient("buttermilk"));
+        available.add(new Ingredient("(3 sticks) unsalted butter"));
+        available.add(new Ingredient("sugar"));
+        available.add(new Ingredient("eggs"));
+        available.add(new Ingredient("packages cream cheese"));
+        available.add(new Ingredient("powdered sugar"));
+        available.add(new Ingredient("bananas"));
 
 //        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Hazelnut Flour"),0.8);
 //        kb.addSubstitute(new Ingredient("Almond Flour"),new Ingredient("Corn Flour"),0.4);
