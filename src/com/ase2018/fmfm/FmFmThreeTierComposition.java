@@ -72,6 +72,7 @@ public class FmFmThreeTierComposition {
                 }
                 if (pref != null) {
                     //comp.add(pref.sub.get(0));
+                    bool = true;
                     comp.addAll(pref.sub);
                     overallSim = overallSim * pref.distance;
                     System.out.println("Overall similarity = " + overallSim);

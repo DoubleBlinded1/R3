@@ -12,7 +12,6 @@ import java.util.Set;
 public class FmFmKnowledgeBaseDB implements KnowledgeBase {
     Set<Recipe> allReq = new HashSet<>();
     Connection connection = null;
-    Statement stmt = null;
     private HashMap<String, Set<Substitute>> substituteHashMap = new HashMap<>();
 
 
@@ -71,14 +70,17 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
             }
 //            System.out.println("Substitutions\n" + substituteHashMap);
             rs.close();
+            stmt.close();
 
             Set<Ingredient> ingredients = null;
+            String name2 = "";
             for (Recipe rec : recipes) {
+                name2 = rec.name;
                 stmt = connection.createStatement();
                 rs = stmt.executeQuery("SELECT db_ingredient.name AS ingName from db_ingredient\n" +
                         "INNER JOIN db_recipeingredient r ON db_ingredient.id = r.ingredient_id\n" +
                         "INNER JOIN db_recipe recipe ON r.recipe_id = recipe.id\n" +
-                        "WHERE recipe.name = \"" + rec.name + "\"");
+                        "WHERE recipe.name = \"" + name2 + "\"");
                 ingredients = new HashSet<>();
                 String name1;
                 while (rs.next()) {
@@ -125,6 +127,7 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
             }
 //            System.out.println("Substitutions\n" + substituteHashMap);
             rs.close();
+            stmt.close();
 
             Set<Ingredient> ingredients = null;
             for (Recipe r : recipes) {
@@ -154,7 +157,7 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
 
     public void getIngredientsOfRecipe(String recipeName) {
         try {
-            stmt = connection.createStatement();
+            Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("Select name FROM db_ingredient WHERE id IN " +
                     "(SELECT ingredient_id FROM  db_recipeingredient " +
                     "WHERE recipe_id = (SELECT id FROM db_recipe where name = \"" +
@@ -211,6 +214,7 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
             }
 //            System.out.println("Substitutions\n" + substituteHashMap);
             rs.close();
+            stmt.close();
         } catch (SQLException e) {
             //e.printStackTrace();
         }
@@ -220,7 +224,6 @@ public class FmFmKnowledgeBaseDB implements KnowledgeBase {
 
     public void terminate() {
         try {
-            stmt.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import com.ase2018.fmfm.Option;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FmFmKnowledgeBaseDB_C_R1 {
+public class FmFmKnowledgeBaseDB_R2 {
 
     public static void main(String[] args) {
 
@@ -29,7 +29,9 @@ public class FmFmKnowledgeBaseDB_C_R1 {
         System.out.println("result = " + comp + "    in " + time + "ms");
 
 
-        String path = "resources/1000recipes_with_substitutions_with_similarity.sqlite3";
+        String path = "resources/100recipes_with_substitutions_with_similarity_with_mods.sqlite3";
+//        String path = "resources/500recipes_with_substitutions_with_similarity_with_mods.sqlite3";
+//        String path = "resources/1000recipes_with_substitutions_with_similarity_with_mods.sqlite3";
 
         available = new HashSet<>();
         com.ase2018.fmfm.FmFmKnowledgeBaseDB kb = new com.ase2018.fmfm.FmFmKnowledgeBaseDB(path);
